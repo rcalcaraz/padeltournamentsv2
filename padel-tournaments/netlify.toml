@@ -1,0 +1,16 @@
+[build]
+  publish = "dist/padel-tournaments/browser"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20.19.0"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  command = "npm start"
+  port = 4200
+  publish = "dist/padel-tournaments/browser" 
