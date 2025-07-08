@@ -1,0 +1,55 @@
+<div class="container">
+  <header class="header">
+    <h1>{{ title }}</h1>
+    <p>Gestión de Ligas y Torneos de Padel</p>
+  </header>
+
+  <main class="main-content">
+    <!-- Formulario para agregar jugador -->
+    <section class="add-player-section">
+      <h2>Agregar Nuevo Jugador</h2>
+      <div class="form-group">
+        <input 
+          type="text" 
+          [(ngModel)]="nuevoJugador" 
+          placeholder="Nombre del jugador"
+          class="input-field"
+          (keyup.enter)="agregarJugador()"
+        >
+        <button 
+          (click)="agregarJugador()" 
+          [disabled]="loading || !nuevoJugador.trim()"
+          class="btn btn-primary"
+        >
+          {{ loading ? 'Agregando...' : 'Agregar' }}
+        </button>
+      </div>
+    </section>
+
+    <!-- Lista de jugadores -->
+    <section class="players-section">
+      <h2>Jugadores Registrados</h2>
+      
+      <div *ngIf="loading" class="loading">
+        <p>Cargando jugadores...</p>
+      </div>
+
+      <div *ngIf="error" class="error">
+        <p>{{ error }}</p>
+      </div>
+
+      <div *ngIf="!loading && !error && jugadores.length === 0" class="empty-state">
+        <p>No hay jugadores registrados aún.</p>
+      </div>
+
+      <div *ngIf="!loading && !error && jugadores.length > 0" class="players-list">
+        <div *ngFor="let jugador of jugadores" class="player-card">
+          <div class="player-info">
+            <span class="player-id">#{{ jugador.id }}</span>
+            <span class="player-name">{{ jugador.nombre }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
